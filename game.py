@@ -224,7 +224,7 @@ def game_loop():
         for i, q in enumerate(questions):
             random_event(player)
 
-            survived = battle(player, q)
+            survived = battle(player, questions)
             if not survived:
                 print("\n💀 Game Over")
                 save_game(player)
@@ -233,7 +233,7 @@ def game_loop():
         # Boss Fight
         print("\n👑 Boss Appears!\n")
         boss_q = random.choice(questions)
-        if not battle(player, boss_q, boss=True):
+        if not battle(player, questions, boss=True):
             print("\n💀 Defeated by Boss")
             save_game(player)
             return
