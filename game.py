@@ -110,11 +110,15 @@ def skill_menu(player):
 # =========================
 def battle(player, questions, boss=False):
     enemy_hp = (120 if boss else 50) + (player.level * 10)
-
     print(f"\n⚔️ {'BOSS BATTLE' if boss else 'Encounter'} in {ZONES[player.zone]['name']}!\n")
 
+    questions_copy = questions[:]  # make a copy
+    random.shuffle(questions_copy)
+
     while enemy_hp > 0 and player.hp > 0:
-        question = random.choice(questions)  # 🔥 NEW LINE
+        if not questions_copy:
+            break  # no more questions
+        question = questions_copy.pop()  # get a unique question
 
         print(f"\n🧑 {player.name} HP: {player.hp}/{player.max_hp}")
         print(f"💻 Enemy HP: {enemy_hp}\n")
@@ -221,19 +225,21 @@ def game_loop():
         questions = load_questions(zone['file'])
         random.shuffle(questions)
 
-        for i, q in enumerate(questions):
-            random_event(player)
-
-            survived = battle(player, questions)
+# ===== ZONE ENCOUNTERS =====
+        for q in questions:
+            survived = battle(player, [q])  # pass single-question list
             if not survived:
                 print("\n💀 Game Over")
                 save_game(player)
                 return
-
-        # Boss Fight
+        
+        # Run a single random event after clearing the zone
+        random_event(player)
+        
+        # ===== BOSS FIGHT =====
         print("\n👑 Boss Appears!\n")
         boss_q = random.choice(questions)
-        if not battle(player, questions, boss=True):
+        if not battle(player, [boss_q], boss=True):  # pass as single-question list
             print("\n💀 Defeated by Boss")
             save_game(player)
             return
