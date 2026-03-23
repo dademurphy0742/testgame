@@ -108,12 +108,14 @@ def skill_menu(player):
 # =========================
 # COMBAT SYSTEM
 # =========================
-def battle(player, question, boss=False):
+def battle(player, questions, boss=False):
     enemy_hp = (120 if boss else 50) + (player.level * 10)
 
     print(f"\n⚔️ {'BOSS BATTLE' if boss else 'Encounter'} in {ZONES[player.zone]['name']}!\n")
 
     while enemy_hp > 0 and player.hp > 0:
+        question = random.choice(questions)  # 🔥 NEW LINE
+
         print(f"\n🧑 {player.name} HP: {player.hp}/{player.max_hp}")
         print(f"💻 Enemy HP: {enemy_hp}\n")
 
