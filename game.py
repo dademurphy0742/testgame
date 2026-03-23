@@ -230,7 +230,7 @@ def game_loop():
 
 # ===== ZONE ENCOUNTERS =====
         for q in questions:
-            survived = battle(player, [q])  # pass single-question list
+            survived = battle(player, questions)
             if not survived:
                 print("\n💀 Game Over")
                 save_game(player)
