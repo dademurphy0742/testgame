@@ -131,6 +131,8 @@ def battle(player, questions, boss=False):
             wrong = [o for o in options if o != question['answer']]
             if wrong:
                 options.remove(random.choice(wrong))
+            player.inventory.remove("hint")  # consume hint
+            print("💡 Hint used! One wrong option removed.")
 
         for i, opt in enumerate(options):
             print(f"{i+1}. {opt}")
