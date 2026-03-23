@@ -1,0 +1,44 @@
+{
+  "commands": [
+    {
+      "question": "Scan open ports on a target",
+      "options": ["nmap", "ls", "pwd", "rm"],
+      "answer": "nmap"
+    },
+    {
+      "question": "Brute-force login credentials",
+      "options": ["hydra", "nmap", "whois", "ping"],
+      "answer": "hydra"
+    },
+    {
+      "question": "Gather domain information",
+      "options": ["whois", "nmap", "hydra", "ssh"],
+      "answer": "whois"
+    },
+    {
+      "question": "Interact with Metasploit framework",
+      "options": ["msfconsole", "nmap", "hydra", "netstat"],
+      "answer": "msfconsole"
+    },
+    {
+      "question": "Capture network packets",
+      "options": ["tcpdump", "ls", "pwd", "cd"],
+      "answer": "tcpdump"
+    },
+    {
+      "question": "Analyze network traffic with GUI",
+      "options": ["wireshark", "tcpdump", "nmap", "hydra"],
+      "answer": "wireshark"
+    },
+    {
+      "question": "Password cracking tool",
+      "options": ["john", "nmap", "ping", "ssh"],
+      "answer": "john"
+    },
+    {
+      "question": "Web vulnerability scanner",
+      "options": ["nikto", "nmap", "hydra", "curl"],
+      "answer": "nikto"
+    }
+  ]
+}
