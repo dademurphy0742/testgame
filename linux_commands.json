@@ -1,0 +1,54 @@
+{
+  "commands": [
+    {
+      "question": "List files in a directory",
+      "options": ["ls", "cd", "rm", "pwd"],
+      "answer": "ls"
+    },
+    {
+      "question": "Change directory",
+      "options": ["ls", "cd", "mv", "pwd"],
+      "answer": "cd"
+    },
+    {
+      "question": "Print current directory",
+      "options": ["pwd", "ls", "cd", "whoami"],
+      "answer": "pwd"
+    },
+    {
+      "question": "Remove a file",
+      "options": ["rm", "cp", "mv", "touch"],
+      "answer": "rm"
+    },
+    {
+      "question": "Copy a file",
+      "options": ["cp", "mv", "rm", "cat"],
+      "answer": "cp"
+    },
+    {
+      "question": "Move or rename a file",
+      "options": ["mv", "cp", "rm", "ls"],
+      "answer": "mv"
+    },
+    {
+      "question": "Create an empty file",
+      "options": ["touch", "nano", "cat", "echo"],
+      "answer": "touch"
+    },
+    {
+      "question": "Display file contents",
+      "options": ["cat", "ls", "pwd", "rm"],
+      "answer": "cat"
+    },
+    {
+      "question": "Create a directory",
+      "options": ["mkdir", "rmdir", "cd", "touch"],
+      "answer": "mkdir"
+    },
+    {
+      "question": "Remove an empty directory",
+      "options": ["rmdir", "rm", "mkdir", "cd"],
+      "answer": "rmdir"
+    }
+  ]
+}
