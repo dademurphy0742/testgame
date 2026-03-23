@@ -1,0 +1,44 @@
+{
+  "commands": [
+    {
+      "question": "Check connectivity to a host",
+      "options": ["ping", "ifconfig", "netstat", "ssh"],
+      "answer": "ping"
+    },
+    {
+      "question": "Display network interfaces",
+      "options": ["ifconfig", "ping", "curl", "wget"],
+      "answer": "ifconfig"
+    },
+    {
+      "question": "Show active network connections",
+      "options": ["netstat", "ping", "ssh", "scp"],
+      "answer": "netstat"
+    },
+    {
+      "question": "Download a file from the web",
+      "options": ["wget", "ls", "rm", "mv"],
+      "answer": "wget"
+    },
+    {
+      "question": "Transfer data from a URL",
+      "options": ["curl", "ping", "netstat", "ssh"],
+      "answer": "curl"
+    },
+    {
+      "question": "Securely connect to a remote server",
+      "options": ["ssh", "ftp", "telnet", "scp"],
+      "answer": "ssh"
+    },
+    {
+      "question": "Copy files over SSH",
+      "options": ["scp", "ssh", "ping", "curl"],
+      "answer": "scp"
+    },
+    {
+      "question": "Display IP routing table",
+      "options": ["route", "ping", "ls", "cd"],
+      "answer": "route"
+    }
+  ]
+}
