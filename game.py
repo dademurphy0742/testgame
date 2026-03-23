@@ -125,6 +125,7 @@ def battle(player, questions, boss=False):
 
         print(f"Question: {question['question']}")
         options = question['options'][:]
+        random.shuffle(options) 
 
         if "hint" in player.inventory and not boss:
             wrong = [o for o in options if o != question['answer']]
