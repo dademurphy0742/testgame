@@ -13,6 +13,10 @@ def assign_skill_point(player):
     if choice.isdigit() and 1 <= int(choice) <= len(skills):
         player.skills[skills[int(choice)-1]] += 1
         print(Fore.GREEN + f"✅ {skills[int(choice)-1]} increased!")
+        return True
+    else:
+        print(Fore.RED + "❌ Invalid choice")
+        return False
 
 def enhanced_level_up(player):
     player.level += 1
