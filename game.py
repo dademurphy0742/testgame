@@ -171,8 +171,8 @@ def battle(player, questions):
         player_content = f"{player.name} HP: {player.hp}/{player.max_hp}"
         enemy_content = f"{enemy.name} HP: {enemy.hp}/{enemy.base_hp}"
         box_width = max(len(player_content), len(enemy_content)) + 4
-        print(Fore.CYAN + f"┌{'─'*box_width}┐\n│ {player_content:<{box_width-2}}│\n└{'─'*box_width}┘")
-        print(Fore.MAGENTA + f"┌{'─'*box_width}┐\n│ {enemy_content:<{box_width-2}}│\n└{'─'*box_width}┘")
+        print(Fore.CYAN + f"┌{'─'*box_width}┐\n│ {player_content:<{box_width-1}}│\n└{'─'*box_width}┘")
+        print(Fore.MAGENTA + f"┌{'─'*box_width}┐\n│ {enemy_content:<{box_width-1}}│\n└{'─'*box_width}┘")
 
         # Question
         print(Fore.WHITE + "--- TERMINAL ---")
