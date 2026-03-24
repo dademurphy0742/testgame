@@ -1,44 +1,34 @@
 {
   "commands": [
-    {
-      "question": "Check connectivity to a host",
-      "options": ["ping", "ifconfig", "netstat", "ssh"],
-      "answer": "ping"
-    },
-    {
-      "question": "Display network interfaces",
-      "options": ["ifconfig", "ping", "curl", "wget"],
-      "answer": "ifconfig"
-    },
-    {
-      "question": "Show active network connections",
-      "options": ["netstat", "ping", "ssh", "scp"],
-      "answer": "netstat"
-    },
-    {
-      "question": "Download a file from the web",
-      "options": ["wget", "ls", "rm", "mv"],
-      "answer": "wget"
-    },
-    {
-      "question": "Transfer data from a URL",
-      "options": ["curl", "ping", "netstat", "ssh"],
-      "answer": "curl"
-    },
-    {
-      "question": "Securely connect to a remote server",
-      "options": ["ssh", "ftp", "telnet", "scp"],
-      "answer": "ssh"
-    },
-    {
-      "question": "Copy files over SSH",
-      "options": ["scp", "ssh", "ping", "curl"],
-      "answer": "scp"
-    },
-    {
-      "question": "Display IP routing table",
-      "options": ["route", "ping", "ls", "cd"],
-      "answer": "route"
-    }
+    {"question": "Transfer data from a URL", "answer": "curl", "options": ["ping", "ssh", "netstat", "curl"], "tags": ["network"]},
+    {"question": "Copy files over SSH", "answer": "scp", "options": ["scp", "curl", "ping", "ssh"], "tags": ["network"]},
+    {"question": "Show active network connections", "answer": "netstat", "options": ["ping", "netstat", "scp", "ssh"], "tags": ["network"]},
+    {"question": "Display IP routing table", "answer": "route", "options": ["ls", "ping", "cd", "route"], "tags": ["network"]},
+    {"question": "Ping a host", "answer": "ping", "options": ["ping", "ssh", "curl", "netstat"], "tags": ["network"]},
+    {"question": "Scan open ports", "answer": "nmap", "options": ["ping", "nmap", "ssh", "tcpdump"], "tags": ["network"]},
+    {"question": "Capture network packets", "answer": "tcpdump", "options": ["tcpdump", "wireshark", "ping", "nmap"], "tags": ["network"]},
+    {"question": "Analyze network traffic with GUI", "answer": "wireshark", "options": ["tcpdump", "hydra", "nmap", "wireshark"], "tags": ["network"]},
+    {"question": "Brute-force login credentials", "answer": "hydra", "options": ["whois", "hydra", "ping", "nmap"], "tags": ["network", "python"]},
+    {"question": "Exploit a vulnerable service", "answer": "msfconsole", "options": ["msfconsole", "hydra", "nmap", "curl"], "tags": ["network", "python"]},
+    {"question": "Check DNS records", "answer": "dig", "options": ["dig", "nslookup", "host", "ping"], "tags": ["network"]},
+    {"question": "Check DNS using alternative tool", "answer": "nslookup", "options": ["dig", "nslookup", "host", "ping"], "tags": ["network"]},
+    {"question": "Check hostname resolution", "answer": "host", "options": ["dig", "nslookup", "host", "ping"], "tags": ["network"]},
+    {"question": "Test connectivity to host", "answer": "traceroute", "options": ["ping", "traceroute", "netstat", "curl"], "tags": ["network"]},
+    {"question": "View routing table", "answer": "ip route", "options": ["route", "ip route", "netstat", "ping"], "tags": ["network"]},
+    {"question": "Check listening ports", "answer": "lsof -i", "options": ["lsof -i", "netstat", "ss", "ps"], "tags": ["network"]},
+    {"question": "View established TCP connections", "answer": "ss -t", "options": ["ss -t", "netstat", "tcpdump", "lsof -i"], "tags": ["network"]},
+    {"question": "Check network interfaces", "answer": "ifconfig", "options": ["ifconfig", "ip addr", "netstat", "ping"], "tags": ["network"]},
+    {"question": "Check IP addresses using modern tool", "answer": "ip addr", "options": ["ip addr", "ifconfig", "ping", "route"], "tags": ["network"]},
+    {"question": "Check bandwidth usage live", "answer": "iftop", "options": ["iftop", "nload", "iperf", "top"], "tags": ["network"]},
+    {"question": "Check live network statistics", "answer": "nload", "options": ["iftop", "nload", "iperf", "top"], "tags": ["network"]},
+    {"question": "Test network throughput", "answer": "iperf", "options": ["iperf", "ping", "netcat", "nmap"], "tags": ["network"]},
+    {"question": "Check open TCP/UDP ports", "answer": "netcat", "options": ["nc", "netcat", "nmap", "ping"], "tags": ["network"]},
+    {"question": "Display ARP table", "answer": "arp -a", "options": ["arp -a", "ip neigh", "netstat", "ifconfig"], "tags": ["network"]},
+    {"question": "Display neighbors via ip tool", "answer": "ip neigh", "options": ["ip neigh", "arp -a", "netstat", "ping"], "tags": ["network"]},
+    {"question": "Monitor traffic live with GUI", "answer": "wireshark", "options": ["wireshark", "tcpdump", "nmap", "iftop"], "tags": ["network"]},
+    {"question": "Automate login brute-force", "answer": "hydra", "options": ["hydra", "nmap", "msfconsole", "ssh"], "tags": ["network", "python"]},
+    {"question": "Check SSL certificate of host", "answer": "openssl s_client", "options": ["openssl s_client", "curl", "nmap", "netcat"], "tags": ["network"]},
+    {"question": "Check who owns IP/domain", "answer": "whois", "options": ["whois", "dig", "nslookup", "ping"], "tags": ["network"]},
+    {"question": "Display active connections with details", "answer": "netstat -tulnp", "options": ["netstat -tulnp", "ss -t", "lsof -i", "top"], "tags": ["network"]}
   ]
 }
