@@ -238,7 +238,7 @@ def game_loop():
         # Shuffle questions once
         random.shuffle(questions)
         
-        # Run battle for all normal questions
+        # Run normal battles
         survived = battle(player, questions)
         if not survived:
             print("\n💀 Game Over")
@@ -248,10 +248,12 @@ def game_loop():
         # Random event
         random_event(player)
         
-        # Boss fight
+        # Boss fight with multiple questions
+        num_boss_questions = min(5, len(questions))
+        boss_questions = random.sample(questions, num_boss_questions)
+        
         print("\n👑 Boss Appears!\n")
-        boss_q = [random.choice(questions)]
-        if not battle(player, boss_q, boss=True):
+        if not battle(player, boss_questions, boss=True):
             print("\n💀 Defeated by Boss")
             save_game(player)
             return
