@@ -20,7 +20,7 @@ BOSS_SEQUENCES = {
 # WEAKNESS SYSTEM
 # =========================
 
-def apply_weakness(enemy, question):
+def apply_weakness(enemy, player, question):
     """
     Returns bonus damage if question tags match enemy weakness
     """
