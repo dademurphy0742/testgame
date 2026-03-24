@@ -156,7 +156,18 @@ def battle(player, questions):
     print(Fore.CYAN + f"🌐 Zone: {['Linux','Network','Kali'][player.zone]}\n⚔️ Encounter: {enemy.name}")
     input(Fore.GREEN + "Press Enter to start the fight…")
 
-    q_pool = questions[:]
+    # =========================
+    # Filter questions by enemy weakness
+    # =========================
+    if enemy.weakness:
+        q_pool = [q for q in questions if enemy.weakness in q.get("tags", [])]
+    else:
+        q_pool = questions[:]
+
+    # fallback: if no questions match, use full zone
+    if not q_pool:
+        q_pool = questions[:]
+
     random.shuffle(q_pool)
 
     while enemy.hp > 0 and player.hp > 0:
@@ -167,14 +178,18 @@ def battle(player, questions):
             break
         q = q_pool.pop()
 
-        # Boxes
+        # =========================
+        # Display player & enemy HP
+        # =========================
         player_content = f"{player.name} HP: {player.hp}/{player.max_hp}"
         enemy_content = f"{enemy.name} HP: {enemy.hp}/{enemy.base_hp}"
         box_width = max(len(player_content), len(enemy_content)) + 4
-        print(Fore.CYAN + f"┌{'─'*box_width}┐\n│ {player_content:<{box_width-1}}│\n└{'─'*box_width}┘")
-        print(Fore.MAGENTA + f"┌{'─'*box_width}┐\n│ {enemy_content:<{box_width-1}}│\n└{'─'*box_width}┘")
+        print(Fore.CYAN + f"┌{'─'*box_width}┐\n│ {player_content:<{box_width-2}}│\n└{'─'*box_width}┘")
+        print(Fore.MAGENTA + f"┌{'─'*box_width}┐\n│ {enemy_content:<{box_width-2}}│\n└{'─'*box_width}┘")
 
-        # Question
+        # =========================
+        # Show terminal challenge
+        # =========================
         print(Fore.WHITE + "--- TERMINAL ---")
         print(Fore.WHITE + f"💻 Challenge: {q['question']}")
         options = q.get("options", [q["answer"]])
@@ -185,6 +200,9 @@ def battle(player, questions):
 
         choice = input(Fore.GREEN + "(i) Use item | Type command > ")
 
+        # =========================
+        # Item usage
+        # =========================
         if choice.strip().lower() == "i":
             result = use_item(player)
             if result == "skip":
@@ -202,7 +220,12 @@ def battle(player, questions):
                     dmg *= 2
                     print(Fore.RED + "💥 CRITICAL HIT!")
                 if enemy.weakness:
-                    dmg += player.skills.get(enemy.weakness, 0) * 3
+                    # Add skill bonus
+                    if isinstance(enemy.weakness, list):
+                        for w in enemy.weakness:
+                            dmg += player.skills.get(w, 0) * 3
+                    else:
+                        dmg += player.skills.get(enemy.weakness, 0) * 3
                 enemy.hp -= dmg
                 print(Fore.YELLOW + f"✅ {dmg} damage")
                 player.gain_xp(25)
@@ -216,6 +239,7 @@ def battle(player, questions):
                     player.status["stun"] = True
 
     return player.hp > 0
+
 
 # =========================
 # GAME LOOP
