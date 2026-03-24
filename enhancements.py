@@ -145,7 +145,7 @@ def multi_step_attack(player, enemy, questions):
             dmg = random.randint(20, 35)
 
             # Apply weakness bonus
-            dmg += apply_weakness(enemy, q)
+            dmg += apply_weakness(enemy, player, q)
 
             dmg = modify_damage(player, dmg)
 
