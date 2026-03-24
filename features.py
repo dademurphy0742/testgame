@@ -18,15 +18,6 @@ def assign_skill_point(player):
         print(Fore.RED + "❌ Invalid choice")
         return False
 
-def enhanced_level_up(player):
-    player.level += 1
-    player.skill_points += 1
-    player.max_hp += 25 + player.skills.get("health", 0) * 5
-    player.hp = player.max_hp
-    print(Fore.BLUE + f"\n🎉 LEVEL UP! Level {player.level} | Skill Points: {player.skill_points}")
-    # Let player assign skill point immediately
-    assign_skill_point(player)
-
 # =========================
 # Loot System
 # =========================
