@@ -5,8 +5,10 @@ import random
 # BOSS SYSTEM
 # =========================
 
+ZONE_BOSS_NAMES = ["APT Hacker", "Firewall Overlord", "Malware Overlord"]
+
 def is_boss(enemy_name):
-    return enemy_name in ["APT Hacker", "Ransomware", "Network Defender", "Account Lockout"]
+    return enemy_name in ZONE_BOSS_NAMES
 
 # Boss sequences now match STEP TAGS (not command names)
 BOSS_SEQUENCES = {
