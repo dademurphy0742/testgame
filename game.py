@@ -1,8 +1,9 @@
 import json
+import copy
 import random
 import os
 from colorama import init, Fore
-from enhancements import multi_step_attack, apply_weakness, use_enhanced_item, process_armor_turn, is_boss
+from enhancements import multi_step_attack, apply_weakness, use_enhanced_item, process_armor_turn, is_boss, modify_damage
 from features import assign_skill_point
 
 init(autoreset=True)
@@ -22,7 +23,8 @@ class Enemy:
         self.hp = base_hp
 
     def scale(self, level):
-        self.hp = self.base_hp + (level * 12)
+        self.max_hp = self.base_hp + (level * 12)
+        self.hp = self.max_hp
 
     def attack(self):
         return random.randint(*self.dmg_range)
@@ -187,13 +189,17 @@ def normal_combat(player, enemy, questions):
 
     while enemy.hp > 0 and player.hp > 0:
         if process_status(player):
+            dmg = enemy.attack()
+            player.take_damage(dmg)
+            print(Fore.RED + f"⚡ Enemy hits you while stunned for {dmg}")
             continue
         if not filtered_qs:
-            break
+            filtered_qs = questions[:]
+            random.shuffle(filtered_qs)
 
         q = filtered_qs.pop()
         player_content = f"{player.name} HP: {player.hp}/{player.max_hp}"
-        enemy_content = f"{enemy.name} HP: {enemy.hp}/{enemy.base_hp}"
+        enemy_content = f"{enemy.name} HP: {enemy.hp}/{enemy.max_hp}"
         box_width = max(len(player_content), len(enemy_content)) + 4
 
         print(Fore.CYAN + f"┌{'─'*box_width}┐")
@@ -215,11 +221,16 @@ def normal_combat(player, enemy, questions):
         cmd = normalize(choice)
 
         if cmd == "i":
-            use_item(player)
+            result = use_item(player)
+            if result == "script":
+                dmg = 30
+                enemy.hp -= dmg
+                print(Fore.YELLOW + f"💥 Script hit for {dmg} damage!")
             continue
 
         if cmd == normalize(q["answer"]):
             dmg = random.randint(15, 30)
+            dmg = modify_damage(player, dmg)
             dmg += apply_weakness(enemy, player, q)
             enemy.hp -= dmg
             print(Fore.YELLOW + f"✅ {dmg} damage")
@@ -257,7 +268,7 @@ def game_loop():
 
         # --- NORMAL ENEMIES ---
         for fight_num in range(10):
-            enemy = random.choice(enemies_pool)
+            enemy = copy.deepcopy(random.choice(enemies_pool))
             alive = normal_combat(player, enemy, questions)
             if not alive:
                 print(Fore.RED + "💀 Game Over")
@@ -271,7 +282,8 @@ def game_loop():
             save_game(player)
 
         # --- BOSS FIGHT ---
-        boss = ZONE_BOSSES[zone["name"]]
+        boss = copy.deepcopy(ZONE_BOSSES[zone["name"]])
+        boss.scale(player.level)
         print(Fore.RED + f"\n🔥 BOSS FIGHT: {boss.name} 🔥")
         _, _, alive = multi_step_attack(boss, player, questions)
         if not alive:
@@ -283,6 +295,7 @@ def game_loop():
         loot_item = random.choice(zone["loot"])
         player.inventory.append(loot_item)
         print(Fore.YELLOW + f"📦 Boss loot acquired: {loot_item}")
+        player.gain_xp(100)
         save_game(player)
 
         player.zone += 1
