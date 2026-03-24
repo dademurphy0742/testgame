@@ -229,24 +229,33 @@ def game_loop():
         random.shuffle(questions)
 
 # ===== ZONE ENCOUNTERS =====
-        for q in questions:
-            survived = battle(player, questions)
-            if not survived:
-                print("\n💀 Game Over")
-                save_game(player)
-                return
+        questions = load_questions(zone['file'])
+        if not questions:
+            print("No questions found for this zone. Skipping...")
+            player.zone += 1
+            continue
         
-        # Run a single random event after clearing the zone
+        # Shuffle questions once
+        random.shuffle(questions)
+        
+        # Run battle for all normal questions
+        survived = battle(player, questions)
+        if not survived:
+            print("\n💀 Game Over")
+            save_game(player)
+            return
+        
+        # Random event
         random_event(player)
         
-        # ===== BOSS FIGHT =====
+        # Boss fight
         print("\n👑 Boss Appears!\n")
-        boss_questions = random.choice(questions)
-        if not battle(player, [boss_questions], boss=True):  # pass as single-question list
+        boss_q = [random.choice(questions)]
+        if not battle(player, boss_q, boss=True):
             print("\n💀 Defeated by Boss")
             save_game(player)
             return
-
+        
         print("\n🏆 Zone Cleared!")
         player.zone += 1
         skill_menu(player)
