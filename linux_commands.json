@@ -33,6 +33,16 @@
     {"question": "Display currently mounted filesystems", "answer": "mount", "options": ["mount", "df", "ls", "pwd"], "tags": ["linux"]},
     {"question": "Show network configuration", "answer": "ifconfig", "options": ["ifconfig", "ip", "netstat", "ping"], "tags": ["linux"]},
     {"question": "Show current IP addresses", "answer": "ip", "options": ["ip", "ifconfig", "ping", "route"], "tags": ["linux"]},
-    {"question": "Trace network route to host", "answer": "traceroute", "options": ["ping", "traceroute", "netstat", "curl"], "tags": ["linux"]}
+    {"question": "Trace network route to host", "answer": "traceroute", "options": ["ping", "traceroute", "netstat", "curl"], "tags": ["linux"]},
+
+    // ----- RANSOMWARE BOSS SEQUENCE -----
+    {"question": "Run malicious Python script", "answer": "python script", "options": ["python script", "chmod", "rm", "ls"], "tags": ["Ransomware", "step1"]},
+    {"question": "Change permissions to exploit", "answer": "chmod exploit", "options": ["chmod exploit", "chown", "chgrp", "ls"], "tags": ["Ransomware", "step2"]},
+    {"question": "Remove malicious payload", "answer": "rm payload", "options": ["rm payload", "rm", "mv", "touch"], "tags": ["Ransomware", "step3"]},
+
+    // ----- APT HACKER BOSS SEQUENCE -----
+    {"question": "Capture network packets", "answer": "tcpdump", "options": ["tcpdump", "wireshark", "nmap", "ping"], "tags": ["APT Hacker", "step1"]},
+    {"question": "Analyze network traffic with GUI", "answer": "wireshark", "options": ["tcpdump", "wireshark", "hydra", "nmap"], "tags": ["APT Hacker", "step2"]},
+    {"question": "Brute-force login credentials", "answer": "hydra", "options": ["hydra", "john", "nmap", "curl"], "tags": ["APT Hacker", "step3"]}
   ]
 }
