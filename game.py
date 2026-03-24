@@ -241,8 +241,8 @@ def game_loop():
         
         # ===== BOSS FIGHT =====
         print("\n👑 Boss Appears!\n")
-        boss_q = random.choice(questions)
-        if not battle(player, [boss_q], boss=True):  # pass as single-question list
+        boss_questions = random.choice(questions)
+        if not battle(player, [boss_questions], boss=True):  # pass as single-question list
             print("\n💀 Defeated by Boss")
             save_game(player)
             return
