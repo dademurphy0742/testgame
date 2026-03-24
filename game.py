@@ -178,6 +178,7 @@ def battle(player, questions):
     enemy.scale(player.level)
 
     print(f"\n⚔️ {enemy.name} engaged!")
+    input("Press Enter to continue…")  # <-- lets player settle in
 
     q_pool = questions[:]
     random.shuffle(q_pool)
