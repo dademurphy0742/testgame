@@ -155,22 +155,6 @@ def process_status(player):
     return False
 
 # =========================
-# TERMINAL COMBAT
-# =========================
-def ask_question_terminal(q, enemy):
-    print("\n--- TERMINAL ---")
-    print(q["question"])
-
-    if q.get("type") == "python":
-        print(q.get("code", ""))
-
-    if enemy.behavior == "evasive":
-        print("⚠️ Output obscured. Be precise.")
-
-    answer = input("$ ")
-    return normalize(answer) == normalize(q["answer"])
-
-# =========================
 # COMBAT
 # =========================
 def battle(player, questions):
@@ -187,54 +171,49 @@ def battle(player, questions):
         if process_status(player):
             continue
 
-        # Pop the question first
         if not q_pool:
             break
         q = q_pool.pop()
 
-        # Show question immediately
         print(f"\n{player.name}: {player.hp} HP | {enemy.name}: {enemy.hp} HP")
         print("--- TERMINAL ---")
         print(q["question"])
-        print("(i)item or type command")
+        if q.get("type") == "python":
+            print(q.get("code", ""))
+        if enemy.behavior == "evasive":
+            print("⚠️ Output obscured. Be precise.")
 
-        choice = input("> ")
+        # Only one input per question
+        answer = input("(i)item or type command> ")
 
-        if choice.strip().lower() == "i":
+        if answer.strip().lower() == "i":
             result = use_item(player)
             if result == "skip":
                 enemy.hp -= 25
                 continue
-
-        correct = ask_question_terminal(q, enemy)
-
-        if correct:
-            crit = random.random() < 0.2
-            dmg = random.randint(15, 30)
-
-            if crit:
-                dmg *= 2
-                print("💥 CRITICAL HIT")
-
-            if enemy.weakness:
-                dmg += player.skills.get(enemy.weakness, 0) * 3
-
-            enemy.hp -= dmg
-            print(f"✅ {dmg} damage")
-
-            if q.get("type") == "python":
-                player.skills["python"] += 1
-
-            player.gain_xp(25)
         else:
-            dmg = enemy.attack()
-            player.take_damage(dmg)
-            print(f"❌ Incorrect. Took {dmg}")
-
-            if enemy.effect == "poison":
-                player.status["poison"] = 3
-            if enemy.effect == "stun" and random.random() < 0.3:
-                player.status["stun"] = True
+            correct = normalize(answer) == normalize(q["answer"])
+            if correct:
+                crit = random.random() < 0.2
+                dmg = random.randint(15, 30)
+                if crit:
+                    dmg *= 2
+                    print("💥 CRITICAL HIT")
+                if enemy.weakness:
+                    dmg += player.skills.get(enemy.weakness or "", 0) * 3
+                enemy.hp -= dmg
+                print(f"✅ {dmg} damage")
+                if q.get("type") == "python":
+                    player.skills["python"] += 1
+                player.gain_xp(25)
+            else:
+                dmg = enemy.attack()
+                player.take_damage(dmg)
+                print(f"❌ Incorrect. Took {dmg}")
+                if enemy.effect == "poison":
+                    player.status["poison"] = 3
+                if enemy.effect == "stun" and random.random() < 0.3:
+                    player.status["stun"] = True
 
     return player.hp > 0
 
@@ -256,7 +235,6 @@ def game_loop():
     while player.zone < len(ZONES):
         zone = ZONES[player.zone]
         print(f"\n🌍 {zone['name']}")
-
         questions = load_questions(zone['file'])
 
         if not battle(player, questions):
@@ -271,7 +249,6 @@ def game_loop():
         save_game(player)
 
     print("🏆 Victory")
-
 
 if __name__ == "__main__":
     game_loop()
