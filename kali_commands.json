@@ -1,44 +1,34 @@
 {
   "commands": [
-    {
-      "question": "Scan open ports on a target",
-      "options": ["nmap", "ls", "pwd", "rm"],
-      "answer": "nmap"
-    },
-    {
-      "question": "Brute-force login credentials",
-      "options": ["hydra", "nmap", "whois", "ping"],
-      "answer": "hydra"
-    },
-    {
-      "question": "Gather domain information",
-      "options": ["whois", "nmap", "hydra", "ssh"],
-      "answer": "whois"
-    },
-    {
-      "question": "Interact with Metasploit framework",
-      "options": ["msfconsole", "nmap", "hydra", "netstat"],
-      "answer": "msfconsole"
-    },
-    {
-      "question": "Capture network packets",
-      "options": ["tcpdump", "ls", "pwd", "cd"],
-      "answer": "tcpdump"
-    },
-    {
-      "question": "Analyze network traffic with GUI",
-      "options": ["wireshark", "tcpdump", "nmap", "hydra"],
-      "answer": "wireshark"
-    },
-    {
-      "question": "Password cracking tool",
-      "options": ["john", "nmap", "ping", "ssh"],
-      "answer": "john"
-    },
-    {
-      "question": "Web vulnerability scanner",
-      "options": ["nikto", "nmap", "hydra", "curl"],
-      "answer": "nikto"
-    }
+    {"question": "Scan open ports on a host", "answer": "nmap", "options": ["nmap", "ping", "ssh", "tcpdump"], "tags": ["network"]},
+    {"question": "Capture packets on a network interface", "answer": "tcpdump", "options": ["tcpdump", "wireshark", "ping", "nmap"], "tags": ["network"]},
+    {"question": "Analyze network traffic with GUI", "answer": "wireshark", "options": ["tcpdump", "hydra", "nmap", "wireshark"], "tags": ["network"]},
+    {"question": "Brute-force login credentials", "answer": "hydra", "options": ["whois", "hydra", "ping", "nmap"], "tags": ["network", "python"]},
+    {"question": "Exploit a vulnerable service", "answer": "msfconsole", "options": ["msfconsole", "hydra", "nmap", "curl"], "tags": ["python", "network"]},
+    {"question": "Automate exploit scripting in Python", "answer": "python", "options": ["bash", "python", "perl", "ruby"], "tags": ["python"]},
+    {"question": "Scan for vulnerable SMB services", "answer": "smbclient", "options": ["smbclient", "ftp", "nmap", "hydra"], "tags": ["network"]},
+    {"question": "Enumerate FTP servers", "answer": "ftp", "options": ["ftp", "nmap", "hydra", "curl"], "tags": ["network"]},
+    {"question": "Scan wireless networks", "answer": "airmon-ng", "options": ["airmon-ng", "iwconfig", "nmcli", "netstat"], "tags": ["network"]},
+    {"question": "Start packet capture for Wi-Fi", "answer": "airodump-ng", "options": ["airodump-ng", "tcpdump", "wireshark", "ping"], "tags": ["network"]},
+    {"question": "Crack captured Wi-Fi handshake", "answer": "aircrack-ng", "options": ["aircrack-ng", "hydra", "john", "nmap"], "tags": ["python", "network"]},
+    {"question": "Check SSL/TLS security of a host", "answer": "openssl s_client", "options": ["openssl s_client", "curl", "nmap", "netcat"], "tags": ["network"]},
+    {"question": "Enumerate subdomains of a domain", "answer": "sublist3r", "options": ["sublist3r", "whois", "dig", "nmap"], "tags": ["network"]},
+    {"question": "Gather WHOIS info for domain/IP", "answer": "whois", "options": ["whois", "dig", "nslookup", "ping"], "tags": ["network"]},
+    {"question": "Perform directory brute-force on web server", "answer": "dirb", "options": ["dirb", "hydra", "nikto", "nmap"], "tags": ["python", "network"]},
+    {"question": "Perform vulnerability scan on web server", "answer": "nikto", "options": ["nikto", "dirb", "nmap", "hydra"], "tags": ["python", "network"]},
+    {"question": "Check IP addresses using modern tool", "answer": "ip addr", "options": ["ip addr", "ifconfig", "ping", "route"], "tags": ["network"]},
+    {"question": "Scan ports and detect OS/service versions", "answer": "nmap -sV", "options": ["nmap -sV", "nmap", "tcpdump", "hydra"], "tags": ["network"]},
+    {"question": "Monitor live network traffic per host", "answer": "iftop", "options": ["iftop", "nload", "tcpdump", "wireshark"], "tags": ["network"]},
+    {"question": "View live network throughput per interface", "answer": "nload", "options": ["nload", "iftop", "iperf", "tcpdump"], "tags": ["network"]},
+    {"question": "Test network throughput between hosts", "answer": "iperf", "options": ["iperf", "ping", "netcat", "nmap"], "tags": ["network"]},
+    {"question": "Check password strength from hash file", "answer": "john", "options": ["john", "hydra", "aircrack-ng", "hashcat"], "tags": ["python"]},
+    {"question": "Brute-force SSH login", "answer": "hydra", "options": ["hydra", "nmap", "msfconsole", "ssh"], "tags": ["python", "network"]},
+    {"question": "Exploit Metasploitable service", "answer": "msfconsole", "options": ["msfconsole", "nmap", "hydra", "curl"], "tags": ["python", "network"]},
+    {"question": "Create simple reverse shell in bash", "answer": "bash", "options": ["bash", "python", "perl", "ruby"], "tags": ["python"]},
+    {"question": "Check open TCP/UDP ports", "answer": "netcat", "options": ["nc", "netcat", "nmap", "ping"], "tags": ["network"]},
+    {"question": "Check routing table", "answer": "route", "options": ["route", "ip route", "netstat", "ping"], "tags": ["network"]},
+    {"question": "Enumerate open services with banner grab", "answer": "nc -v", "options": ["nc -v", "nmap", "netcat", "curl"], "tags": ["network"]},
+    {"question": "Search for files containing specific text", "answer": "grep", "options": ["grep", "find", "locate", "awk"], "tags": ["kali"]},
+    {"question": "Check listening services live", "answer": "ss -tulnp", "options": ["ss -tulnp", "netstat -tulnp", "lsof -i", "top"], "tags": ["network"]}
   ]
 }
