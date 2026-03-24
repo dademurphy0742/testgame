@@ -1,6 +1,9 @@
 import json
 import random
 import os
+from colorama import init, Fore, Style
+
+init(autoreset=True)
 
 SAVE_FILE = "savegame.json"
 
@@ -72,7 +75,7 @@ class Player:
         self.skill_points += 1
         self.max_hp += 25
         self.hp = self.max_hp
-        print(f"\n🎉 LEVEL UP! Level {self.level} | Skill Points: {self.skill_points}\n")
+        print(Fore.BLUE + f"\n🎉 LEVEL UP! Level {self.level} | Skill Points: {self.skill_points}\n")
 
     def to_dict(self):
         return self.__dict__
@@ -87,7 +90,7 @@ class Player:
 def save_game(player):
     with open(SAVE_FILE, "w") as f:
         json.dump(player.to_dict(), f)
-    print("💾 Game saved.")
+    print(Fore.YELLOW + "💾 Game saved.")
 
 
 def load_game():
@@ -129,12 +132,13 @@ def use_item(player):
 
     if item == "heal":
         player.heal(30)
+        print(Fore.CYAN + "💊 Restored 30 HP")
     elif item == "script":
-        print("⚡ Script executed")
+        print(Fore.YELLOW + "⚡ Script executed")
         return "skip"
     elif item == "firewall":
         player.status["armor"] = 5
-        print("🛡️ Firewall active")
+        print(Fore.CYAN + "🛡️ Firewall active")
 
     return None
 
@@ -145,10 +149,10 @@ def process_status(player):
     if player.status["poison"] > 0:
         player.take_damage(5)
         player.status["poison"] -= 1
-        print("☠️ Poison")
+        print(Fore.MAGENTA + "☠️ Poison damage")
 
     if player.status["stun"]:
-        print("⚠️ Stunned")
+        print(Fore.YELLOW + "⚡ Stunned! Skipping turn")
         player.status["stun"] = False
         return True
 
@@ -161,8 +165,9 @@ def battle(player, questions):
     enemy = random.choice(ENEMIES)
     enemy.scale(player.level)
 
-    print(f"\n⚔️ {enemy.name} engaged!")
-    input("Press Enter to start the fight…")
+    print(Fore.BLUE + f"\n{'='*30} ⚡ CYBERNETIC ENGAGEMENT ⚡ {'='*30}\n")
+    print(Fore.CYAN + f"🌐 Zone: {['Linux','Network','Kali'][player.zone]}\n⚔️ Encounter: {enemy.name}")
+    input(Fore.GREEN + "Press Enter to start the fight…")
 
     q_pool = questions[:]
     random.shuffle(q_pool)
@@ -175,19 +180,25 @@ def battle(player, questions):
             break
         q = q_pool.pop()
 
-        print(f"\n{player.name}: {player.hp} HP | {enemy.name}: {enemy.hp} HP")
-        print("--- TERMINAL ---")
-        print(q["question"])
+        # Display stats
+        print(Fore.CYAN + f"\n┌─ Player ────────────────┐")
+        print(Fore.CYAN + f"│ {player.name:<10} HP: {player.hp}/{player.max_hp} │")
+        print(Fore.CYAN + f"└{'─'*25}┘")
 
-        # show up to 4 options as reference hints
+        print(Fore.MAGENTA + f"┌─ Enemy ─────────────────┐")
+        print(Fore.MAGENTA + f"│ {enemy.name:<15} HP: {enemy.hp}/{enemy.base_hp} │")
+        print(Fore.MAGENTA + f"└{'─'*25}┘")
+
+        # Show question & hints
+        print(Fore.WHITE + "--- TERMINAL ---")
+        print(Fore.WHITE + f"💻 Challenge: {q['question']}")
         options = q.get("options", [q["answer"]])
         random.shuffle(options)
-        print("Options for reference:")
+        print(Fore.GREEN + "Options for reference:")
         for opt in options[:4]:
-            print(f"- {opt}")
+            print(Fore.GREEN + f"• {opt}")
 
-        print("(i)item or type command>")
-        choice = input(" ")
+        choice = input(Fore.GREEN + "(i) Use item | Type command > ")
 
         if choice.strip().lower() == "i":
             result = use_item(player)
@@ -201,18 +212,16 @@ def battle(player, questions):
                 dmg = random.randint(15, 30)
                 if crit:
                     dmg *= 2
-                    print("💥 CRITICAL HIT")
+                    print(Fore.RED + "💥 CRITICAL HIT!")
                 if enemy.weakness:
                     dmg += player.skills.get(enemy.weakness, 0) * 3
                 enemy.hp -= dmg
-                print(f"✅ {dmg} damage")
-                if q.get("type") == "python":
-                    player.skills["python"] += 1
+                print(Fore.YELLOW + f"✅ {dmg} damage")
                 player.gain_xp(25)
             else:
                 dmg = enemy.attack()
                 player.take_damage(dmg)
-                print(f"❌ Incorrect. Took {dmg}")
+                print(Fore.RED + f"❌ Incorrect. Took {dmg}")
                 if enemy.effect == "poison":
                     player.status["poison"] = 3
                 if enemy.effect == "stun" and random.random() < 0.3:
@@ -237,21 +246,23 @@ def game_loop():
 
     while player.zone < len(ZONES):
         zone = ZONES[player.zone]
-        print(f"\n🌍 {zone['name']}")
+        print(Fore.BLUE + f"\n🌐 Zone: {zone['name']}")
         questions = load_questions(zone['file'])
 
         if not battle(player, questions):
-            print("💀 Game Over")
+            print(Fore.RED + "💀 Game Over")
             save_game(player)
             return
 
-        print("📦 Loot acquired")
-        player.inventory.append(random.choice(["heal", "script", "firewall"]))
-
-        player.zone += 1
+        # Loot & save
+        loot_item = random.choice(["heal", "script", "firewall"])
+        player.inventory.append(loot_item)
+        print(Fore.YELLOW + f"📦 Loot acquired: {loot_item}")
         save_game(player)
 
-    print("🏆 Victory")
+        player.zone += 1
+
+    print(Fore.GREEN + "🏆 Victory")
 
 if __name__ == "__main__":
     game_loop()
