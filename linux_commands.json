@@ -1,54 +1,38 @@
 {
   "commands": [
-    {
-      "question": "List files in a directory",
-      "options": ["ls", "cd", "rm", "pwd"],
-      "answer": "ls"
-    },
-    {
-      "question": "Change directory",
-      "options": ["ls", "cd", "mv", "pwd"],
-      "answer": "cd"
-    },
-    {
-      "question": "Print current directory",
-      "options": ["pwd", "ls", "cd", "whoami"],
-      "answer": "pwd"
-    },
-    {
-      "question": "Remove a file",
-      "options": ["rm", "cp", "mv", "touch"],
-      "answer": "rm"
-    },
-    {
-      "question": "Copy a file",
-      "options": ["cp", "mv", "rm", "cat"],
-      "answer": "cp"
-    },
-    {
-      "question": "Move or rename a file",
-      "options": ["mv", "cp", "rm", "ls"],
-      "answer": "mv"
-    },
-    {
-      "question": "Create an empty file",
-      "options": ["touch", "nano", "cat", "echo"],
-      "answer": "touch"
-    },
-    {
-      "question": "Display file contents",
-      "options": ["cat", "ls", "pwd", "rm"],
-      "answer": "cat"
-    },
-    {
-      "question": "Create a directory",
-      "options": ["mkdir", "rmdir", "cd", "touch"],
-      "answer": "mkdir"
-    },
-    {
-      "question": "Remove an empty directory",
-      "options": ["rmdir", "rm", "mkdir", "cd"],
-      "answer": "rmdir"
-    }
+    {"question": "Remove an empty directory", "answer": "rmdir", "options": ["rm", "cd", "rmdir", "mkdir"], "tags": ["linux"]},
+    {"question": "Move or rename a file", "answer": "mv", "options": ["ls", "cp", "mv", "rm"], "tags": ["linux"]},
+    {"question": "Create an empty file", "answer": "touch", "options": ["cat", "echo", "touch", "nano"], "tags": ["linux"]},
+    {"question": "Create a directory", "answer": "mkdir", "options": ["rmdir", "cd", "mkdir", "touch"], "tags": ["linux"]},
+    {"question": "Display current directory", "answer": "pwd", "options": ["pwd", "cd", "ls", "echo"], "tags": ["linux"]},
+    {"question": "List files and directories", "answer": "ls", "options": ["ls", "cd", "pwd", "touch"], "tags": ["linux"]},
+    {"question": "Change directory", "answer": "cd", "options": ["ls", "cd", "pwd", "mkdir"], "tags": ["linux"]},
+    {"question": "Copy a file", "answer": "cp", "options": ["cp", "mv", "rm", "touch"], "tags": ["linux"]},
+    {"question": "Display contents of a file", "answer": "cat", "options": ["cat", "echo", "nano", "touch"], "tags": ["linux"]},
+    {"question": "Search text in a file", "answer": "grep", "options": ["grep", "find", "locate", "awk"], "tags": ["linux"]},
+    {"question": "Find files by name", "answer": "find", "options": ["find", "locate", "grep", "which"], "tags": ["linux"]},
+    {"question": "Locate files quickly using database", "answer": "locate", "options": ["locate", "find", "grep", "whereis"], "tags": ["linux"]},
+    {"question": "Show manual for a command", "answer": "man", "options": ["man", "info", "help", "which"], "tags": ["linux"]},
+    {"question": "Show last lines of a file", "answer": "tail", "options": ["head", "tail", "cat", "less"], "tags": ["linux"]},
+    {"question": "Show first lines of a file", "answer": "head", "options": ["head", "tail", "cat", "less"], "tags": ["linux"]},
+    {"question": "Display file page by page", "answer": "less", "options": ["more", "less", "cat", "tail"], "tags": ["linux"]},
+    {"question": "Count words, lines, characters", "answer": "wc", "options": ["wc", "grep", "cut", "awk"], "tags": ["linux"]},
+    {"question": "Print environment variables", "answer": "printenv", "options": ["env", "printenv", "set", "export"], "tags": ["linux"]},
+    {"question": "List running processes", "answer": "ps", "options": ["ps", "top", "htop", "jobs"], "tags": ["linux"]},
+    {"question": "Show live process view", "answer": "top", "options": ["ps", "top", "htop", "jobs"], "tags": ["linux"]},
+    {"question": "Terminate a process by PID", "answer": "kill", "options": ["kill", "pkill", "xkill", "top"], "tags": ["linux"]},
+    {"question": "Terminate a process by name", "answer": "pkill", "options": ["kill", "pkill", "xkill", "top"], "tags": ["linux"]},
+    {"question": "Change file permissions", "answer": "chmod", "options": ["chmod", "chown", "chgrp", "umask"], "tags": ["linux"]},
+    {"question": "Change file owner", "answer": "chown", "options": ["chmod", "chown", "chgrp", "ls"], "tags": ["linux"]},
+    {"question": "Change file group", "answer": "chgrp", "options": ["chmod", "chown", "chgrp", "ls"], "tags": ["linux"]},
+    {"question": "Show disk usage of files", "answer": "du", "options": ["df", "du", "ls", "free"], "tags": ["linux"]},
+    {"question": "Show free disk space", "answer": "df", "options": ["df", "du", "ls", "mount"], "tags": ["linux"]},
+    {"question": "Check memory usage", "answer": "free", "options": ["free", "top", "vmstat", "htop"], "tags": ["linux"]},
+    {"question": "Mount a filesystem", "answer": "mount", "options": ["mount", "umount", "ls", "df"], "tags": ["linux"]},
+    {"question": "Unmount a filesystem", "answer": "umount", "options": ["umount", "mount", "ls", "df"], "tags": ["linux"]},
+    {"question": "Display currently mounted filesystems", "answer": "mount", "options": ["mount", "df", "ls", "pwd"], "tags": ["linux"]},
+    {"question": "Show network configuration", "answer": "ifconfig", "options": ["ifconfig", "ip", "netstat", "ping"], "tags": ["linux"]},
+    {"question": "Show current IP addresses", "answer": "ip", "options": ["ip", "ifconfig", "ping", "route"], "tags": ["linux"]},
+    {"question": "Trace network route to host", "answer": "traceroute", "options": ["ping", "traceroute", "netstat", "curl"], "tags": ["linux"]}
   ]
 }
