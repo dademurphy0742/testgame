@@ -11,6 +11,16 @@ BOSS_SEQUENCES = {
     "Ransomware": ["python script", "chmod exploit", "rm payload"]
 }
 
+def apply_weakness(enemy, player, question):
+    """
+    Apply bonus damage if the player uses the correct command against enemy weaknesses.
+    """
+    # Check if enemy has weaknesses tagged and question matches
+    if 'weakness' in enemy.__dict__ and question['tags'][0] in enemy.weakness:
+        damage_bonus = 10  # or scale with player.level
+        return damage_bonus
+    return 0
+
 # Handle boss attack sequence
 def multi_step_attack(player, enemy, questions):
     sequence = BOSS_SEQUENCES.get(enemy.name, [])
