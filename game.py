@@ -106,7 +106,7 @@ def load_questions(file):
         return json.load(f)["commands"]
 
 # =========================
-# NORMALIZATION (KEY FOR TERMINAL MODE)
+# NORMALIZATION
 # =========================
 def normalize(cmd):
     return cmd.strip().lower()
@@ -178,7 +178,7 @@ def battle(player, questions):
     enemy.scale(player.level)
 
     print(f"\n⚔️ {enemy.name} engaged!")
-    input("Press Enter to start the fight…")  # first pause
+    input("Press Enter to start the fight…")
 
     q_pool = questions[:]
     random.shuffle(q_pool)
@@ -192,7 +192,10 @@ def battle(player, questions):
             break
         q = q_pool.pop()
 
+        # Show question immediately
         print(f"\n{player.name}: {player.hp} HP | {enemy.name}: {enemy.hp} HP")
+        print("--- TERMINAL ---")
+        print(q["question"])
         print("(i)item or type command")
 
         choice = input("> ")
