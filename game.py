@@ -178,21 +178,24 @@ def battle(player, questions):
         print(f"\n{player.name}: {player.hp} HP | {enemy.name}: {enemy.hp} HP")
         print("--- TERMINAL ---")
         print(q["question"])
-        if q.get("type") == "python":
-            print(q.get("code", ""))
-        if enemy.behavior == "evasive":
-            print("⚠️ Output obscured. Be precise.")
 
-        # Only one input per question
-        answer = input("(i)item or type command> ")
+        # show up to 4 options as reference hints
+        options = q.get("options", [q["answer"]])
+        random.shuffle(options)
+        print("Options for reference:")
+        for opt in options[:4]:
+            print(f"- {opt}")
 
-        if answer.strip().lower() == "i":
+        print("(i)item or type command>")
+        choice = input(" ")
+
+        if choice.strip().lower() == "i":
             result = use_item(player)
             if result == "skip":
                 enemy.hp -= 25
                 continue
         else:
-            correct = normalize(answer) == normalize(q["answer"])
+            correct = normalize(choice) == normalize(q["answer"])
             if correct:
                 crit = random.random() < 0.2
                 dmg = random.randint(15, 30)
@@ -200,7 +203,7 @@ def battle(player, questions):
                     dmg *= 2
                     print("💥 CRITICAL HIT")
                 if enemy.weakness:
-                    dmg += player.skills.get(enemy.weakness or "", 0) * 3
+                    dmg += player.skills.get(enemy.weakness, 0) * 3
                 enemy.hp -= dmg
                 print(f"✅ {dmg} damage")
                 if q.get("type") == "python":
