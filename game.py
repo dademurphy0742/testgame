@@ -178,7 +178,7 @@ def battle(player, questions):
     enemy.scale(player.level)
 
     print(f"\n⚔️ {enemy.name} engaged!")
-    input("Press Enter to continue…")  # <-- lets player settle in
+    input("Press Enter to start the fight…")  # first pause
 
     q_pool = questions[:]
     random.shuffle(q_pool)
@@ -187,17 +187,17 @@ def battle(player, questions):
         if process_status(player):
             continue
 
-        print(f"\n{player.name}: {player.hp} HP | {enemy.name}: {enemy.hp} HP")
-
+        # Pop the question first
         if not q_pool:
             break
-
         q = q_pool.pop()
 
-        print("(i)item")
+        print(f"\n{player.name}: {player.hp} HP | {enemy.name}: {enemy.hp} HP")
+        print("(i)item or type command")
+
         choice = input("> ")
 
-        if choice == "i":
+        if choice.strip().lower() == "i":
             result = use_item(player)
             if result == "skip":
                 enemy.hp -= 25
