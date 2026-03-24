@@ -8,27 +8,33 @@
     {"question": "Scan open ports", "answer": "nmap", "options": ["ping", "nmap", "ssh", "tcpdump"], "tags": ["network"]},
     {"question": "Capture network packets", "answer": "tcpdump", "options": ["tcpdump", "wireshark", "ping", "nmap"], "tags": ["network"]},
     {"question": "Analyze network traffic with GUI", "answer": "wireshark", "options": ["tcpdump", "hydra", "nmap", "wireshark"], "tags": ["network"]},
-    {"question": "Brute-force login credentials", "answer": "hydra", "options": ["whois", "hydra", "ping", "nmap"], "tags": ["network", "python"]},
-    {"question": "Exploit a vulnerable service", "answer": "msfconsole", "options": ["msfconsole", "hydra", "nmap", "curl"], "tags": ["network", "python"]},
     {"question": "Check DNS records", "answer": "dig", "options": ["dig", "nslookup", "host", "ping"], "tags": ["network"]},
     {"question": "Check DNS using alternative tool", "answer": "nslookup", "options": ["dig", "nslookup", "host", "ping"], "tags": ["network"]},
     {"question": "Check hostname resolution", "answer": "host", "options": ["dig", "nslookup", "host", "ping"], "tags": ["network"]},
-    {"question": "Test connectivity to host", "answer": "traceroute", "options": ["ping", "traceroute", "netstat", "curl"], "tags": ["network"]},
-    {"question": "View routing table", "answer": "ip route", "options": ["route", "ip route", "netstat", "ping"], "tags": ["network"]},
+    {"question": "Trace route to a host", "answer": "traceroute", "options": ["ping", "traceroute", "netstat", "curl"], "tags": ["network"]},
+    {"question": "View routing table (modern)", "answer": "ip route", "options": ["route", "ip route", "netstat", "ping"], "tags": ["network"]},
     {"question": "Check listening ports", "answer": "lsof -i", "options": ["lsof -i", "netstat", "ss", "ps"], "tags": ["network"]},
     {"question": "View established TCP connections", "answer": "ss -t", "options": ["ss -t", "netstat", "tcpdump", "lsof -i"], "tags": ["network"]},
     {"question": "Check network interfaces", "answer": "ifconfig", "options": ["ifconfig", "ip addr", "netstat", "ping"], "tags": ["network"]},
-    {"question": "Check IP addresses using modern tool", "answer": "ip addr", "options": ["ip addr", "ifconfig", "ping", "route"], "tags": ["network"]},
-    {"question": "Check bandwidth usage live", "answer": "iftop", "options": ["iftop", "nload", "iperf", "top"], "tags": ["network"]},
-    {"question": "Check live network statistics", "answer": "nload", "options": ["iftop", "nload", "iperf", "top"], "tags": ["network"]},
+    {"question": "Check IP addresses (modern)", "answer": "ip addr", "options": ["ip addr", "ifconfig", "ping", "route"], "tags": ["network"]},
+    {"question": "Monitor bandwidth usage live", "answer": "iftop", "options": ["iftop", "nload", "iperf", "top"], "tags": ["network"]},
+    {"question": "View live network stats", "answer": "nload", "options": ["iftop", "nload", "iperf", "top"], "tags": ["network"]},
     {"question": "Test network throughput", "answer": "iperf", "options": ["iperf", "ping", "netcat", "nmap"], "tags": ["network"]},
     {"question": "Check open TCP/UDP ports", "answer": "netcat", "options": ["nc", "netcat", "nmap", "ping"], "tags": ["network"]},
     {"question": "Display ARP table", "answer": "arp -a", "options": ["arp -a", "ip neigh", "netstat", "ifconfig"], "tags": ["network"]},
     {"question": "Display neighbors via ip tool", "answer": "ip neigh", "options": ["ip neigh", "arp -a", "netstat", "ping"], "tags": ["network"]},
-    {"question": "Monitor traffic live with GUI", "answer": "wireshark", "options": ["wireshark", "tcpdump", "nmap", "iftop"], "tags": ["network"]},
-    {"question": "Automate login brute-force", "answer": "hydra", "options": ["hydra", "nmap", "msfconsole", "ssh"], "tags": ["network", "python"]},
     {"question": "Check SSL certificate of host", "answer": "openssl s_client", "options": ["openssl s_client", "curl", "nmap", "netcat"], "tags": ["network"]},
     {"question": "Check who owns IP/domain", "answer": "whois", "options": ["whois", "dig", "nslookup", "ping"], "tags": ["network"]},
-    {"question": "Display active connections with details", "answer": "netstat -tulnp", "options": ["netstat -tulnp", "ss -t", "lsof -i", "top"], "tags": ["network"]}
+    {"question": "Display active connections with details", "answer": "netstat -tulnp", "options": ["netstat -tulnp", "ss -t", "lsof -i", "top"], "tags": ["network"]},
+
+    // -------- APT HACKER (NETWORK BOSS) --------
+    {"question": "Sniff packets for covert traffic", "answer": "tcpdump", "options": ["tcpdump", "wireshark", "nmap", "ping"], "tags": ["APT Hacker", "step1"]},
+    {"question": "Deep analyze captured packets", "answer": "wireshark", "options": ["tcpdump", "wireshark", "hydra", "iftop"], "tags": ["APT Hacker", "step2"]},
+    {"question": "Exploit credentials from traffic", "answer": "hydra", "options": ["hydra", "john", "nmap", "curl"], "tags": ["APT Hacker", "step3"]},
+
+    // -------- NETWORK DEFENDER (NEW BOSS) --------
+    {"question": "Identify open ports before defense", "answer": "nmap", "options": ["nmap", "ping", "netstat", "tcpdump"], "tags": ["Network Defender", "step1"]},
+    {"question": "Inspect active connections", "answer": "netstat", "options": ["netstat", "ss", "lsof -i", "ping"], "tags": ["Network Defender", "step2"]},
+    {"question": "Secure connections by analyzing sockets", "answer": "ss -tulnp", "options": ["ss -tulnp", "netstat", "lsof -i", "top"], "tags": ["Network Defender", "step3"]}
   ]
 }
