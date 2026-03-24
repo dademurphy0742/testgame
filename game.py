@@ -273,7 +273,7 @@ def game_loop():
         # --- BOSS FIGHT ---
         boss = ZONE_BOSSES[zone["name"]]
         print(Fore.RED + f"\n🔥 BOSS FIGHT: {boss.name} 🔥")
-        alive = multi_step_attack(boss, player, questions)
+        _, _, alive = multi_step_attack(boss, player, questions)
         if not alive:
             print(Fore.RED + "💀 Game Over")
             save_game(player)
