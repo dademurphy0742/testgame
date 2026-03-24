@@ -3,7 +3,7 @@ import copy
 import random
 import os
 from colorama import init, Fore
-from enhancements import multi_step_attack, apply_weakness, use_enhanced_item, process_armor_turn, is_boss, modify_damage
+from enhancements import multi_step_attack, apply_weakness, use_enhanced_item, process_armor_turn, modify_damage
 from features import assign_skill_point
 
 init(autoreset=True)
@@ -94,8 +94,8 @@ class Player:
         self.hp = self.max_hp
         print(Fore.BLUE + f"\n🎉 LEVEL UP! Level {self.level} | Skill Points: {self.skill_points}")
         while self.skill_points > 0:
-            assign_skill_point(self)
-            self.skill_points -= 1
+            if assign_skill_point(self):
+                self.skill_points -= 1
 
     def to_dict(self):
         return self.__dict__
@@ -228,7 +228,12 @@ def normal_combat(player, enemy, questions):
                 print(Fore.YELLOW + f"💥 Script hit for {dmg} damage!")
             continue
 
-        if cmd == normalize(q["answer"]):
+        correct_answers = [normalize(q["answer"])]
+
+        # allow shorthand (first word match)
+        correct_answers.append(normalize(q["answer"].split()[0]))
+        
+        if cmd in correct_answers:
             dmg = random.randint(15, 30)
             dmg = modify_damage(player, dmg)
             dmg += apply_weakness(enemy, player, q)
