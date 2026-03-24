@@ -29,6 +29,15 @@
     {"question": "Check routing table", "answer": "route", "options": ["route", "ip route", "netstat", "ping"], "tags": ["network"]},
     {"question": "Enumerate open services with banner grab", "answer": "nc -v", "options": ["nc -v", "nmap", "netcat", "curl"], "tags": ["network"]},
     {"question": "Search for files containing specific text", "answer": "grep", "options": ["grep", "find", "locate", "awk"], "tags": ["kali"]},
-    {"question": "Check listening services live", "answer": "ss -tulnp", "options": ["ss -tulnp", "netstat -tulnp", "lsof -i", "top"], "tags": ["network"]}
+    {"question": "Check listening services live", "answer": "ss -tulnp", "options": ["ss -tulnp", "netstat -tulnp", "lsof -i", "top"], "tags": ["network"]},
+
+    // ----- KALI BOSS SEQUENCE -----
+    {"question": "Capture network packets for APT Hacker", "answer": "tcpdump", "options": ["tcpdump", "wireshark", "nmap", "ping"], "tags": ["APT Hacker", "step1"]},
+    {"question": "Analyze captured traffic with GUI", "answer": "wireshark", "options": ["tcpdump", "wireshark", "hydra", "nmap"], "tags": ["APT Hacker", "step2"]},
+    {"question": "Crack captured credentials", "answer": "hydra", "options": ["hydra", "john", "nmap", "curl"], "tags": ["APT Hacker", "step3"]},
+
+    {"question": "Exploit vulnerable Metasploitable service", "answer": "msfconsole", "options": ["msfconsole", "hydra", "nmap", "curl"], "tags": ["Account Lockout", "step1"]},
+    {"question": "Scan and brute-force SSH logins", "answer": "hydra", "options": ["hydra", "john", "nmap", "curl"], "tags": ["Account Lockout", "step2"]},
+    {"question": "Capture live Wi-Fi handshake", "answer": "airodump-ng", "options": ["airodump-ng", "tcpdump", "wireshark", "ping"], "tags": ["Account Lockout", "step3"]}
   ]
 }
